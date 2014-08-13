@@ -1,0 +1,6 @@
+# 'logrotate' calls
+0 * * * * logrotate -s /tmp/logrotate.status /etc/logrotate.conf >/dev/null 2>&1
+
+# Enable this line to reboot the system at required time
+#30 5 * * * reboot
+

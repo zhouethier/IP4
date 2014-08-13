@@ -1,0 +1,38 @@
+diff -Naur a/auto/types/sizeof b/auto/types/sizeof
+--- a/auto/types/sizeof	2014-08-04 14:53:26.418698147 +0200
++++ b/auto/types/sizeof	2014-08-04 14:51:31.310650783 +0200
+@@ -41,7 +41,33 @@
+     eval "$ngx_test >> $NGX_AUTOCONF_ERR 2>&1"
+ 
+     if [ -x $NGX_AUTOTEST ]; then
+-        ngx_size=`$NGX_AUTOTEST`
++	case "$ngx_type" in
++		"int")
++			ngx_size='4'
++		;;
++		"long")
++			ngx_size='4'
++		;;
++		"time_t")
++			ngx_size='4'
++		;;
++		"long long")
++			ngx_size='8'
++		;;
++		"void *")
++			ngx_size='4'
++		;;
++		"sig_atomic_t")
++			ngx_size='4'
++		;;
++		"size_t")
++			ngx_size='4'
++		;;
++		"off_t")
++			ngx_size='4'
++		;;
++
++	esac
+         echo " $ngx_size bytes"
+     fi
+ 

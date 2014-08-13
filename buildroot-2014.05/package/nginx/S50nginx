@@ -1,0 +1,55 @@
+#!/bin/sh
+#
+# Starts nginx 
+#
+
+# Application name (executable name, comments name, ...)
+APP_NAME=nginx
+
+# Application full path
+APP_FULL_PATH="/usr/sbin/${APP_NAME}"
+
+# Calling arguments
+APP_ARG=""
+
+# Pid file directory
+APP_PID_DIR="/var/run/"
+
+# Make sure the progam exists
+[ -f "${APP_FULL_PATH}" ] || exit 0
+
+start() {
+        echo -n "Starting ${APP_NAME}: "
+        mkdir -p "/var/log/nginx" "/tmp/nginx"
+        chown 33:33 "/var/log/nginx" "/tmp/nginx"
+        umask 022
+        ${APP_FULL_PATH}
+        echo "OK"
+}
+stop() {
+        echo -n "Stopping ${APP_NAME}: "
+	${APP_FULL_PATH} -s stop
+        echo "OK"
+}
+restart() {
+        stop
+        start
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart|reload)
+        restart
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?
+

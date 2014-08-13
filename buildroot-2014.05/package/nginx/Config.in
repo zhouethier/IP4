@@ -1,0 +1,21 @@
+config BR2_PACKAGE_NGINX
+        bool "nginx"
+        select BR2_PACKAGE_OPENSSL
+	select BR2_PACKAGE_PCRE
+	select BR2_PACKAGE_ZLIB
+	select BR2_PACKAGE_LOGROTATE
+	select BR2_PACKAGE_LIBATOMIC_OPS
+	default "n"
+        help
+	  nginx [engine x] is an HTTP and reverse proxy server, as well as a mail proxy server, written by Igor Sysoev.
+	  
+	  http://nginx.org
+
+if BR2_PACKAGE_NGINX
+config BR2_PACKAGE_NGINX_LOGS_DIR
+        string "nginx logs directory"
+        default /var/log/nginx
+        help
+          Sets directory where nginx will store its logs. Please note that this parameter
+	  is not automatically updated in nginx config and start-up file (nginx.conf,S50nginx)
+endif

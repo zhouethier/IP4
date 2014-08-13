@@ -1,0 +1,14 @@
+#!/bin/sh
+
+case "$1" in
+ start)
+  crond -c /etc/cron/crontabs
+  ;;
+ stop)
+  killall crond
+  ;;
+ *)
+  echo  "Usage: $0 start|stop"
+  ;;
+esac
+

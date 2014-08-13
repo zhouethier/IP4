@@ -1,0 +1,5 @@
+config BR2_PACKAGE_FAKE_HW_CLOCK
+	bool "fake_hw_clock"
+	help
+	  Custom made script for boards that do not have RTC. Script saves time
+	  into a file on system shutdown and loads it back on system startup.

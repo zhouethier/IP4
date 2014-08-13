@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Script to load and save system time on platform without RealTimeClock
+
+# Parameters
+time_file=/etc/fake-hw-clock
+
+case "$1" in
+  start)
+        echo "Setting time to last saved at $time_file"
+	date -s "$(cat $time_file)"
+        ;;
+  stop)
+        echo "Saving current time to $time_file"
+	date -Iseconds | sed -r 's/[T+]/ /g' | awk '{print $1 " " $2}' > $time_file
+        ;;
+  *)
+        echo "Usage: $0 {start|stop}"
+        exit 1
+esac
+
+exit $?
+
